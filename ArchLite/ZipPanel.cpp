@@ -1,5 +1,11 @@
 ﻿#include "ZipPanel.h"
 
+#include <wx/wx.h>
+#include <wx/listctrl.h>
+#include <wx/gbsizer.h>
+#include <wx/progdlg.h>
+#include "ignoringtraverser.h"
+
 
 
 ZipPanel::ZipPanel(wxWindow* parent)
@@ -208,7 +214,27 @@ void ZipPanel::LoadFilesToCompress()
     wxProgressDialog dialog("Loading Files", "Loading files to compress...",
         100, this, wxPD_APP_MODAL | wxPD_AUTO_HIDE);
 
+    FilesList->DeleteAllItems();
 
+    IgnoringTraverser Traverser;
+
+    Traverser.ShouldIgnoreDir = [this](const std::string& dirName) {
+        return this->IgnoredList->FindItem(-1, dirName) >= 0;
+        };
+
+    Traverser.FileEnterCallback = [this, &dialog](const std::string& fileName) {
+        int itemcount = FilesList->GetItemCount();
+
+        if (itemcount % PulseInterval == 0) {
+            dialog.Pulse();
+        }
+
+        FilesList->InsertItem(itemcount, fileName);
+        };
+
+    wxString dirtocompress = DirToCompressText->GetValue();
+
+    wxDir(dirtocompress).Traverse(Traverser);
 }
 
 void ZipPanel::PerformCompression()

@@ -3,6 +3,7 @@
 #include <wx/listctrl.h>
 #include <wx/gbsizer.h>
 #include <wx/progdlg.h>
+#include "ignoringtraverser.h"
 
 
 class ZipPanel : public wxPanel
