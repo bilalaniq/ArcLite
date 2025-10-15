@@ -1,0 +1,30 @@
+# Build folders
+x64/
+Debug/
+Release/
+ipch/
+
+# Visual Studio files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Compiled binaries
+*.exe
+*.obj
+*.pdb
+*.idb
+*.ilk
+*.log
+
+# wxWidgets generated data
+*.res
+*.aps
+*.ncb
+*.opendb
+
+# OS junk
+Thumbs.db
+desktop.ini
