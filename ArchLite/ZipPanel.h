@@ -3,6 +3,9 @@
 #include <wx/listctrl.h>
 #include <wx/gbsizer.h>
 #include <wx/progdlg.h>
+#include <wx/stream.h>
+#include <wx/zipstrm.h> 
+#include <wx/wfstream.h>
 #include "ignoringtraverser.h"
 
 

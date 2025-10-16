@@ -4,6 +4,9 @@
 #include <wx/listctrl.h>
 #include <wx/gbsizer.h>
 #include <wx/progdlg.h>
+#include <wx/stream.h>
+#include <wx/zipstrm.h> 
+#include <wx/wfstream.h>
 #include "ignoringtraverser.h"
 
 
@@ -143,11 +146,6 @@ void ZipPanel::SetupLoadFileSection()
 
     IgnoredList->Bind(wxEVT_LIST_ITEM_DESELECTED, [this, ignoreRemovebutton](wxListEvent& event)
         { ignoreRemovebutton->Disable(); });
-
-    
-
-
-
 }
 
 void ZipPanel::SetupCompressSection()
@@ -232,6 +230,12 @@ void ZipPanel::LoadFilesToCompress()
         FilesList->InsertItem(itemcount, fileName);
         };
 
+    Traverser.DirEnterCallback = [this, &dialog](const std::string& dirName) {
+        int itemcount = FilesList->GetItemCount();
+        if (itemcount % PulseInterval == 0) dialog.Pulse();
+        FilesList->InsertItem(itemcount, dirName);
+        };
+
     wxString dirtocompress = DirToCompressText->GetValue();
 
     wxDir(dirtocompress).Traverse(Traverser);
@@ -239,6 +243,46 @@ void ZipPanel::LoadFilesToCompress()
 
 void ZipPanel::PerformCompression()
 {
-    wxMessageBox("ok", "ok", wxOK);
+    wxString directorytocompress = DirToCompressText->GetValue();
+    wxString zipFile = zipFileText->GetValue();
+
+
+    wxFileOutputStream outStream = wxFileOutputStream(zipFile);  // wxFileOutputStream is a wxWidgets class that lets you write (output) data into a file.
+
+    if (!outStream.IsOk()) {
+        wxMessageBox("failed to open zipfile", "Error", wxOK | wxICON_ERROR);
+        return;
+    }
+
+
+    wxZipOutputStream zip(outStream);
+
+    wxProgressDialog dialog("Compressing", "Compressing files...", FilesList->GetItemCount(), 
+        this, wxPD_APP_MODAL | wxPD_AUTO_HIDE);
+
+    for (int i = 0; i < FilesList->GetItemCount(); i++) {
+        wxString path = FilesList->GetItemText(i);
+        wxFileName fileName(path);
+        fileName.MakeRelativeTo(directorytocompress);
+        wxString relativePath = fileName.GetFullPath();
+
+        if (wxDirExists(path)) {
+            // ✅ Add empty folder to the zip
+            zip.PutNextDirEntry(relativePath);
+            wxLogDebug("Adding folder %s", relativePath);
+        }
+        else if (wxFileExists(path)) {
+            // ✅ Add file to zip
+            zip.PutNextEntry(relativePath);
+            wxFFileInputStream(path).Read(zip);
+            zip.CloseEntry();
+            wxLogDebug("Compressing %s", relativePath);
+        }
+
+        dialog.Update(i);
+    }
+
+    zip.Close();
+    outStream.Close();
 }
 
