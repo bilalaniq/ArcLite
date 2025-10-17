@@ -7,6 +7,7 @@
 Mainframe::Mainframe(const wxString& title)
     : wxFrame(nullptr, wxID_ANY, title)
 {
+    SetIcon(wxICON(IDI_ICON1));
 
     wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 

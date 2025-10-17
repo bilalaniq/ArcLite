@@ -134,6 +134,7 @@
     <ClInclude Include="aboutPanel.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Mainframe.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="unzippanel.h" />
     <ClInclude Include="ZipPanel.h" />
   </ItemGroup>
@@ -143,6 +144,13 @@
     <ClCompile Include="Mainframe.cpp" />
     <ClCompile Include="unzippanel.cpp" />
     <ClCompile Include="ZipPanel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="AL.png" />
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
