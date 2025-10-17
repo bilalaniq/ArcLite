@@ -2,7 +2,6 @@
 
 <p align="center"> <strong><span style="font-size:1.5em;">A fast, lightweight, and secure ZIP management tool built with wxWidgets</span></strong> </p> <p align="center"> <img src="./ArchLite/AL.png" alt="ArcLite Logo" width="400"/> </p>
 
----
 
 ### Overview
 
