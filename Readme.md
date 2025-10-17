@@ -1,12 +1,10 @@
 # ArcLite
 
-**A fast, lightweight, and secure ZIP management tool built with wxWidgets**
-
-<img src="./ArchLite/AL.png" alt="AL" width="400"/>
+<p align="center"> <strong><span style="font-size:1.5em;">A fast, lightweight, and secure ZIP management tool built with wxWidgets</span></strong> </p> <p align="center"> <img src="./ArchLite/AL.png" alt="ArcLite Logo" width="400"/> </p>
 
 ---
 
-### 📖 Overview
+### Overview
 
 **ArcLite** is a desktop utility designed to simplify file compression and extraction.
 Built with **C++ and wxWidgets**, it offers a modern interface, efficient performance,
