@@ -131,12 +131,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="aboutPanel.h" />
     <ClInclude Include="App.h" />
     <ClInclude Include="Mainframe.h" />
     <ClInclude Include="unzippanel.h" />
     <ClInclude Include="ZipPanel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aboutPanel.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Mainframe.cpp" />
     <ClCompile Include="unzippanel.cpp" />

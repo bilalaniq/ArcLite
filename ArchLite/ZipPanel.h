@@ -16,7 +16,6 @@ public:
 
 private:
     void SetupSections();
-    void SetupSizers();
     void SetupLoadDirectorySection();
     void SetupLoadFileSection();
     void SetupCompressSection();

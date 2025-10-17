@@ -32,8 +32,6 @@ void ZipPanel::SetupSections()
     mainSizer->SetSizeHints(this);
 }
 
-
-
 void ZipPanel::SetupLoadDirectorySection()
 {
     // Section title

@@ -2,6 +2,7 @@
 #include <wx/notebook.h>
 #include "ZipPanel.h"
 #include "UnzipPanel.h"
+#include "aboutPanel.h"
 
 Mainframe::Mainframe(const wxString& title)
     : wxFrame(nullptr, wxID_ANY, title)
@@ -12,6 +13,9 @@ Mainframe::Mainframe(const wxString& title)
     wxNotebook* tabs = new wxNotebook(this, wxID_ANY);
     tabs->AddPage(new ZipPanel(tabs), "Zip");
     tabs->AddPage(new UnzipPanel(tabs), "Unzip");
+    tabs->AddPage(new aboutPanel(tabs), "About");
+
+
 
     sizer->Add(tabs, 1, wxEXPAND | wxALL, FromDIP(10));
     SetSizer(sizer);
